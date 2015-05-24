@@ -899,14 +899,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_BROWSER_SCM, "Unable to complete model search.");					
 				}
 			}
+			return 1;
 		}
-		else if (dialogid == DIALOG_ENTER_MODEL)
+		if (dialogid == DIALOG_ENTER_MODEL)
 		{
 			if (response)
 			{
 				SetBrowserModelID(playerid, strval(inputtext));
 				SendClientMessage(playerid, COLOR_BROWSER_SCM, "Preview model set.");
 			}
+			return 1;
 		}
 	}
     #if defined Mb_OnDialogResponse
@@ -930,67 +932,91 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 			if (funcidx("OnPlayerExitModelBrowser") != -1)
 				CallLocalFunction("OnPlayerExitModelBrowser", "i", playerid);			
 		}
+
 		// zoom out in
-		else if (clickedid == gsGlobalTextDraws[15])
+		if (clickedid == gsGlobalTextDraws[15])
 		{
 			SetBrowserModelZoom(playerid, GetBrowserModelZoom(playerid) + 0.1);
+			return 1;
 		}
+
 		// zoom out
-		else if (clickedid == gsGlobalTextDraws[16])
+		if (clickedid == gsGlobalTextDraws[16])
 		{
 			SetBrowserModelZoom(playerid, GetBrowserModelZoom(playerid) - 0.1);
+			return 1;
 		}
+
 		// x rotation -
-		else if (clickedid == gsGlobalTextDraws[21])
+		if (clickedid == gsGlobalTextDraws[21])
 		{
 			SetBrowserModelRot(playerid, rot_x - 10.0, rot_y, rot_z);
+			return 1;
 		}
+
 		// x rotation +
-		else if (clickedid == gsGlobalTextDraws[22])
+		if (clickedid == gsGlobalTextDraws[22])
 		{
 			SetBrowserModelRot(playerid, rot_x + 10.0, rot_y, rot_z);
+			return 1;
 		}
+
 		// y rotation -
-		else if (clickedid == gsGlobalTextDraws[18])
+		if (clickedid == gsGlobalTextDraws[18])
 		{
 			SetBrowserModelRot(playerid, rot_x, rot_y - 10.0, rot_z);
+			return 1;
 		}
+
 		// y rotation +
-		else if (clickedid == gsGlobalTextDraws[19])
+		if (clickedid == gsGlobalTextDraws[19])
 		{
 			SetBrowserModelRot(playerid, rot_x, rot_y + 10.0, rot_z);
+			return 1;
 		}
+
 		// z rotation -
-		else if (clickedid == gsGlobalTextDraws[24])
+		if (clickedid == gsGlobalTextDraws[24])
 		{
 			SetBrowserModelRot(playerid, rot_x, rot_y, rot_z - 10.0);
+			return 1;
 		}
+
 		// z rotation +
-		else if (clickedid == gsGlobalTextDraws[25])
+		if (clickedid == gsGlobalTextDraws[25])
 		{
 			SetBrowserModelRot(playerid, rot_x, rot_y, rot_z + 10.0);
+			return 1;
 		}
+
 		// previous model
-		else if (clickedid == gsGlobalTextDraws[12])
+		if (clickedid == gsGlobalTextDraws[12])
 		{
 			SetBrowserModelID(playerid, GetBrowserModelID(playerid) - 1);
+			return 1;
 		}
+
 		// next model
-		else if (clickedid == gsGlobalTextDraws[13])
+		if (clickedid == gsGlobalTextDraws[13])
 		{
 			SetBrowserModelID(playerid, GetBrowserModelID(playerid) + 1);
+			return 1;
 		}
+
 		// search button
-		else if (clickedid == gsGlobalTextDraws[6])
+		if (clickedid == gsGlobalTextDraws[6])
 		{
 			ShowPlayerDialog(playerid, DIALOG_SEARCH, DIALOG_STYLE_INPUT, "Model search", "Please enter your search. A search can contain up to " #MAX_BROWSER_SEARCH_LEN " characters maximum.", "Search", "Cancel");
+			return 1;
 		}
+
 		// close button
-		else if (clickedid == gsGlobalTextDraws[26])
+		if (clickedid == gsGlobalTextDraws[26])
 		{
 			HideModelBrowser(playerid);
 			if (funcidx("OnPlayerExitModelBrowser") != -1)
 				CallLocalFunction("OnPlayerExitModelBrowser", "i", playerid);
+			return 1;
 		}
 	}
     #if defined Mb_OnPlayerClickTextDraw
